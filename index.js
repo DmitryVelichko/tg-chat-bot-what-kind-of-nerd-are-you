@@ -31,3 +31,11 @@ const start = () => {
         await bot.sendMessage(chatId, `Привет, . Готов ?`);
         return bot.sendMessage(chatId, '👇👇 Жми,  ! Рискни  👇👇', button)
       }
+      
+      if (text === '/no') {
+        await bot.sendMessage(chatId, `Не бойся.`);
+        return bot.sendMessage(chatId, '👇👇 Жми,  ! Рискни  👇👇', button)
+      }
+      
+      return bot.sendMessage(chatId, 'Я тебя не понял. Ты чё не?')
+    });
