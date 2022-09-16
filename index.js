@@ -16,3 +16,18 @@ const button = {
         ]
     })
 }
+
+const start = () => {
+    bot.setMyCommands([
+        {command: '/start', description: 'Узнать!'},
+    ])
+    
+    bot.on('message', async (msg) => {
+      const text = msg.text;
+      const chatId = msg.chat.id;
+    
+      if (text === '/start') {
+        await bot.sendSticker(chatId, './img1.webp')
+        await bot.sendMessage(chatId, `Привет, . Готов ?`);
+        return bot.sendMessage(chatId, '👇👇 Жми,  ! Рискни  👇👇', button)
+      }
