@@ -39,3 +39,8 @@ const start = () => {
       
       return bot.sendMessage(chatId, 'Я тебя не понял. Ты чё не?')
     });
+
+    bot.on('callback_query', async (msg) => {
+        const data = msg.data;
+        const chatId = msg.message.chat.id;
+        const randomNumber = Math.floor(Math.random()*10)
