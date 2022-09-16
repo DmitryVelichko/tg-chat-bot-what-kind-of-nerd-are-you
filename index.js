@@ -44,3 +44,11 @@ const start = () => {
         const data = msg.data;
         const chatId = msg.message.chat.id;
         const randomNumber = Math.floor(Math.random()*10)
+
+        await bot.sendSticker(chatId, `${castes[randomNumber].photo}`)
+        await bot.sendMessage(chatId, `Ну что ж, ${msg.from.first_name}... Сегодня твоя каста: ${castes[randomNumber].caste}.`);
+        return bot.sendMessage(chatId, `${castes[randomNumber].desc}`);
+    })
+}
+
+start()
