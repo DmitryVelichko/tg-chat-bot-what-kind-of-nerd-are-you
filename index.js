@@ -2,10 +2,11 @@
 const telegramApi = require('node-telegram-bot-api');
 
 
+
 const bot = new telegramApi(token, { polling: true });
 
 const ITarr = [
-    {id: 0, name: 'не включающий камеру в Zoom-e айтишник', photo: './0.png', desc: 'desc'},
+    {id: 0, name: 'айтишник, не включающий камеру в Zoom-e', photo: './0.png', desc: 'desc'},
     {id: 1, name: 'слегка огорченный айтишник', photo: './1.png', desc: 'desc'},
     {id: 2, name: 'айтишник-фанат Линукса', photo: './2.png', desc: 'desc'},
     {id: 3, name: 'удивленный айтишник', photo: './3.png', desc: 'desc'},
@@ -18,19 +19,19 @@ const ITarr = [
     {id: 10, name: 'айтишник, чей код скомпилировался', photo: './10.png', desc: 'desc'},
     {id: 11, name: 'рисковый айтишник, не извлекающий безопасно флэшку', photo: './11.png', desc: 'desc'},
     {id: 12, name: 'голодный айтишник', photo: './12.png', desc: 'desc'},
-    {id: 13, name: 'получивший корпоративный ноутбук айтишник', photo: './13.png', desc: 'desc'},
+    {id: 13, name: 'айтишник, получивший корпоративный ноутбук', photo: './13.png', desc: 'desc'},
     {id: 14, name: 'сверх-продуктивный айтишник', photo: './14.png', desc: 'desc'},
     {id: 15, name: 'слегка выгоревший айтишник', photo: './15.png', desc: 'desc'},
     {id: 16, name: 'айтишник, у которого есть друзья', photo: './16.png', desc: 'desc'},
-    {id: 17, name: 'проводящий код-ревью айтишник', photo: './17.png', desc: 'desc'},
+    {id: 17, name: 'айтишник, проводящий код-ревью', photo: './17.png', desc: 'desc'},
     {id: 18, name: 'позитивный айтишник', photo: './18.png', desc: 'desc'},
-    {id: 19, name: 'получивший похвалу от начальника айтишник', photo: './19.png', desc: 'desc'},
+    {id: 19, name: 'айтишник, получивший похвалу от начальника', photo: './19.png', desc: 'desc'},
     {id: 20, name: 'продуктивный айтишник', photo: './20.png', desc: 'desc'},
     {id: 21, name: 'айтишник, проходящий стажировку', photo: './21.png', desc: 'desc'},
     {id: 22, name: 'айтишник, работающий с железом', photo: './22.png', desc: 'desc'},
     {id: 23, name: 'айтишник со здоровой осанкой', photo: './23.png', desc: 'desc'},
     {id: 24, name: 'айтишник, устроивший на работу друга', photo: './24.png', desc: 'desc'},
-    {id: 25, name: 'работающий из дома айтишник', photo: './25.png', desc: 'desc'},
+    {id: 25, name: 'айтишник, работающий из дома', photo: './25.png', desc: 'desc'},
     {id: 26, name: 'айтишник-супергерой', photo: './26.png', desc: 'desc'},
     {id: 27, name: 'айтишник на пороге дедлайна', photo: './27.png', desc: 'desc'},
     {id: 28, name: 'senior айтишник', photo: './28.png', desc: 'desc'},
@@ -42,7 +43,7 @@ const ITarr = [
     {id: 34, name: 'айтишник, умеющий найти подход к коллегам', photo: './34.png', desc: 'desc'},
     {id: 35, name: 'айтишник, забывший удалить историю браузера', photo: './35.png', desc: 'desc'},
     {id: 36, name: 'айтишник с синдромом самозванца', photo: './36.png', desc: 'desc'},
-    {id: 37, name: 'айтишник, пробившийся в IT после 30', photo: './37.png', desc: 'desc'},
+    {id: 37, name: 'айтишник, начавший карьеру в IT после 30', photo: './37.png', desc: 'desc'},
     {id: 38, name: 'айтишник, работающий на Internet Explorer', photo: './38.png', desc: 'desc'},
     {id: 39, name: 'backend-разработчик', photo: './39.png', desc: 'desc'},
     {id: 40, name: 'айтишник, снова вышедший на рынок труда', photo: './40.png', desc: 'desc'},
@@ -76,28 +77,6 @@ const button2 = {
     })
 }
 
-function Myrand(max,min){
-    arr=[];
-    for (let j = 0; j < max; j++) {
-        let x = Math.floor( Math.random() * max) + min;
-        if(arr.includes(x) == true){
-            j=j-1;
-        }else{
-            if(x > max==false){
-                arr.push(x);
-            }
-        }
-    }
-    return arr;
-}
-const randomArr = Myrand(53,1);
-
-let i = 0;
-
-let randomNumber;
-
-
-
 const start = () => {
     bot.setMyCommands([
         {command: '/start', description: 'Узнать свой оттенок!'},
@@ -109,7 +88,7 @@ const start = () => {
     
       if (text === '/start') {
         await bot.sendSticker(chatId, './img1.webp')
-        await bot.sendMessage(chatId, `Привет, ${msg.from.first_name}. Какой ты сегодня айтишник? 🤔`);
+        await bot.sendMessage(chatId, `Привет, ${msg.from.first_name}) Какой ты сегодня айтишник? 🤔`);
         return bot.sendMessage(chatId, '👇👇 Дави на кнопку 👇👇', button)
       }
       
@@ -119,20 +98,19 @@ const start = () => {
     bot.on('callback_query', async (msg) => {
         const data = msg.data;
         const chatId = msg.message.chat.id;
-        randomNumber= randomArr[i];
 
-        if(randomNumber === undefined) {
-            function randomIntFromInterval(min, max) { // min and max included 
-                   return Math.floor(Math.random() * (max - min + 1) + min)
-                 }
-                 
-                  randomNumber = randomIntFromInterval(0, 52)
-       }
-        
-        
+        function randomIntFromInterval(min, max) { // min and max included 
+            return Math.floor(Math.random() * (max - min + 1) + min)
+          }
+          
+          const randomNumber = randomIntFromInterval(0, 52)
+    
+
         await bot.sendSticker(chatId, `${ITarr[randomNumber].photo}`)
-        await bot.sendMessage(chatId, `Ну что ж, ${msg.from.first_name}... Сегодня ты ${ITarr[randomNumber].name} 😂`).then(i++);
+        await bot.sendMessage(chatId, `Ну что ж, ${msg.from.first_name}... Сегодня ты ${ITarr[randomNumber].name} 😂`)
         return bot.sendMessage(chatId, '👇👇 Попробовать еще раз 👇👇', button2);
+    
+    
         
     })
 }
