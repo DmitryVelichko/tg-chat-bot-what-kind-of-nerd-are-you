@@ -40,7 +40,7 @@ const ITarr = [
     {id: 32, name: 'айтишник, не любящий Windows', photo: './32.png', desc: 'desc'},
     {id: 33, name: 'айтишник, решивший попробовать парное программирование', photo: './33.png', desc: 'desc'},
     {id: 34, name: 'айтишник, умеющий найти подход к коллегам', photo: './34.png', desc: 'desc'},
-    {id: 35, name: 'айтишник, забываший удалить историю браузера', photo: './35.png', desc: 'desc'},
+    {id: 35, name: 'айтишник, забывший удалить историю браузера', photo: './35.png', desc: 'desc'},
     {id: 36, name: 'айтишник с синдромом самозванца', photo: './36.png', desc: 'desc'},
     {id: 37, name: 'айтишник, пробившийся в IT после 30', photo: './37.png', desc: 'desc'},
     {id: 38, name: 'айтишник, работающий на Internet Explorer', photo: './38.png', desc: 'desc'},
@@ -76,6 +76,28 @@ const button2 = {
     })
 }
 
+function Myrand(max,min){
+    arr=[];
+    for (let j = 0; j < max; j++) {
+        let x = Math.floor( Math.random() * max) + min;
+        if(arr.includes(x) == true){
+            j=j-1;
+        }else{
+            if(x > max==false){
+                arr.push(x);
+            }
+        }
+    }
+    return arr;
+}
+const randomArr = Myrand(53,1);
+
+let i = 0;
+
+let randomNumber;
+
+
+
 const start = () => {
     bot.setMyCommands([
         {command: '/start', description: 'Узнать свой оттенок!'},
@@ -97,16 +119,21 @@ const start = () => {
     bot.on('callback_query', async (msg) => {
         const data = msg.data;
         const chatId = msg.message.chat.id;
+        randomNumber= randomArr[i];
 
-        function randomIntFromInterval(min, max) { // min and max included 
-            return Math.floor(Math.random() * (max - min + 1) + min)
-          }
-          
-          const randomNumber = randomIntFromInterval(0, 52)
-
+        if(randomNumber === undefined) {
+            function randomIntFromInterval(min, max) { // min and max included 
+                   return Math.floor(Math.random() * (max - min + 1) + min)
+                 }
+                 
+                  randomNumber = randomIntFromInterval(0, 52)
+       }
+        
+        
         await bot.sendSticker(chatId, `${ITarr[randomNumber].photo}`)
-        await bot.sendMessage(chatId, `Ну что ж, ${msg.from.first_name}... Сегодня ты ${ITarr[randomNumber].name} 😂😅 `);
-        return bot.sendMessage(chatId, '👇👇 Попробовать еще раз 👇👇', button2)
+        await bot.sendMessage(chatId, `Ну что ж, ${msg.from.first_name}... Сегодня ты ${ITarr[randomNumber].name} 😂`).then(i++);
+        return bot.sendMessage(chatId, '👇👇 Попробовать еще раз 👇👇', button2);
+        
     })
 }
 
