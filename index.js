@@ -6,25 +6,25 @@ const token = '';
 const bot = new telegramApi(token, { polling: true });
 
 const ITarr = [
-    {id: 0, name: 'ТАИНСТВЕННЫЙ', photo: './0.png', desc: 'desc'},
-    {id: 1, name: 'СЛЕГКА ОГОРЧЕННЫЙ', photo: './1.png', desc: 'desc'},
-    {id: 2, name: 'name', photo: './2.png', desc: 'desc'},
-    {id: 3, name: 'name', photo: './3.png', desc: 'desc'},
-    {id: 4, name: 'name', photo: './4.png', desc: 'desc'},
-    {id: 5, name: 'name', photo: './5.png', desc: 'desc'},
-    {id: 6, name: 'name', photo: './6.png', desc: 'desc'},
-    {id: 7, name: 'name', photo: './7.png', desc: 'desc'},
-    {id: 8, name: 'name', photo: './8.png', desc: 'desc'},
-    {id: 9, name: 'name', photo: './9.png', desc: 'desc'},
-    {id: 10, name: 'name', photo: './10.png', desc: 'desc'},
-    {id: 11, name: 'name', photo: './11.png', desc: 'desc'},
-    {id: 12, name: 'name', photo: './12.png', desc: 'desc'},
-    {id: 13, name: 'name', photo: './13.png', desc: 'desc'},
-    {id: 14, name: 'name', photo: './14.png', desc: 'desc'},
-    {id: 15, name: 'name', photo: './15.png', desc: 'desc'},
-    {id: 16, name: 'name', photo: './16.png', desc: 'desc'},
-    {id: 17, name: 'name', photo: './17.png', desc: 'desc'},
-    {id: 18, name: 'name', photo: './18.png', desc: 'desc'},
+    {id: 0, name: 'ТАИНСТВЕННЫЙ айтишник', photo: './0.png', desc: 'desc'},
+    {id: 1, name: 'СЛЕГКА ОГОРЧЕННЫЙ айтишник', photo: './1.png', desc: 'desc'},
+    {id: 2, name: 'ОДИНОКИЙ айтишник', photo: './2.png', desc: 'desc'},
+    {id: 3, name: 'УДИВЛЕННЫЙ айтишник', photo: './3.png', desc: 'desc'},
+    {id: 4, name: 'УВЛЕЧЕННЫЙ айтишник', photo: './4.png', desc: 'desc'},
+    {id: 5, name: 'УСЕРДНО РАБОТАЮЩИЙ айтишник', photo: './5.png', desc: 'desc'},
+    {id: 6, name: 'ПИШУЩИЙ КОД айтишник', photo: './6.png', desc: 'desc'},
+    {id: 7, name: 'JUNIOR айтишник', photo: './7.png', desc: 'desc'},
+    {id: 8, name: 'ЗАРЯЖЕННЫЙ НА РАбОТУ айтишник', photo: './8.png', desc: 'desc'},
+    {id: 9, name: 'ОЧЕНЬ УМНЫЙ айтишник', photo: './9.png', desc: 'desc'},
+    {id: 10, name: 'ЗАСТАВИЛ СВОЙ КОД РАБОТАТЬ', photo: './10.png', desc: 'desc'},
+    {id: 11, name: 'НЕ ВКЛЮЧАЮЩИЙ КАМЕРУ В ZOOM-e айтишник', photo: './11.png', desc: 'desc'},
+    {id: 12, name: 'ЭФФЕКТИВНЫЙ айтишник', photo: './12.png', desc: 'desc'},
+    {id: 13, name: 'УДИВЛЕН, ЧТО ТВОЯ ПРОГРАММА РАБОТАЕТ', photo: './13.png', desc: 'desc'},
+    {id: 14, name: 'СВЕРХ-ПРОДУКТИВНЫЙ айтишник', photo: './14.png', desc: 'desc'},
+    {id: 15, name: 'СЛЕГКА ВЫГОРЕВШИЙ айтишник', photo: './15.png', desc: 'desc'},
+    {id: 16, name: 'ХВАСТАЕШЬСЯ СВОИМ КОРПОРАТИВНЫМ НОУТБУКОМ', photo: './16.png', desc: 'desc'},
+    {id: 17, name: 'ПРОВОДЯЩИЙ КОД-РЕВЬЮ айтишник', photo: './17.png', desc: 'desc'},
+    {id: 18, name: 'ПОЗИТИВНЫЙ айтишник', photo: './18.png', desc: 'desc'},
     {id: 19, name: 'name', photo: './19.png', desc: 'desc'},
     {id: 20, name: 'name', photo: './20.png', desc: 'desc'},
     {id: 21, name: 'name', photo: './21.png', desc: 'desc'},
@@ -98,10 +98,15 @@ const start = () => {
     bot.on('callback_query', async (msg) => {
         const data = msg.data;
         const chatId = msg.message.chat.id;
-        const randomNumber = Math.floor(Math.random()*10)
+
+        function randomIntFromInterval(min, max) { // min and max included 
+            return Math.floor(Math.random() * (max - min + 1) + min)
+          }
+          
+          const randomNumber = randomIntFromInterval(0, 52)
 
         await bot.sendSticker(chatId, `${ITarr[randomNumber].photo}`)
-        await bot.sendMessage(chatId, `Ну что ж, ${msg.from.first_name}... Сегодня ты: ${ITarr[randomNumber].name} айтишник 🤫🤭`);
+        await bot.sendMessage(chatId, `Ну что ж, ${msg.from.first_name}... Сегодня ты: ${ITarr[randomNumber].name} 😂😅 `);
         return bot.sendMessage(chatId, '👇👇 Попробовать еще раз 👇👇', button2)
     })
 }
