@@ -1,5 +1,6 @@
 
 const telegramApi = require('node-telegram-bot-api');
+const sequelize = require('./db');
 
 
 
@@ -77,7 +78,14 @@ const button2 = {
     })
 }
 
-const start = () => {
+const start = async () => {
+    try {
+        await sequelize.authenticate();
+        await sequelize.sync();
+    } catch(e) {
+
+    }
+
     bot.setMyCommands([
         {command: '/start', description: 'Узнать свой оттенок!'},
     ])
